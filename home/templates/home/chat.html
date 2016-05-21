@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>p2p-chat-python</title>
+<link href='https://fonts.googleapis.com/css?family=Oswald|Open+Sans' rel='stylesheet' type='text/css'>
+<h1 style="font-family:'Oswald',sans-serif;">p2p-chat-python</h1>
+<hr>
+<style>
+form { 
+margin: auto;
+padding:7px;
+width : 50%;
+border-radius : 10px;
+border : 2px solid #008B8B;
+} 
+textarea:focus{
+box-shadow:0px 0px 15px gray;
+}
+textarea{
+box-shadow:0px 0px 0px;
+transition:fade, box-shadow 0.35s;
+}
+sub_button{
+background:white;
+}
+msg{
+box-shadow:0px 0px 0px;
+transition:fade, box-shadow 0.35s;
+}
+msg:focus{
+box-shadow:0px 0px 15px gray;
+}
+</style>
+<script>
+var x=document.getElementById("msg");
+var y=document.getElementById("but");
+while(x.value == "")
+{
+y.disabled=true;
+}
+</script>
+<br><br>
+</head>
+<body style="font-family:'Open Sans',sans-serif;">
+<form>
+<div class="fieldset">
+<fieldset>
+<legend> Chatroom </legend>
+aghsfhafsdhafsdasd
+</fieldset>
+</div>
+<br>
+<div class="textarea">
+<textarea id="text" rows="4" cols="81" style="resize:none;" disabled placeholder="Your chats will appear here"></textarea></div><br>
+<div class="msg"><input id="msg" type="text" name="message" autofocus placeholder="Enter your message here"><br></div><br>
+<div class="sub_button"><button id="but" type="submit" value="Submit" style="margin:auto;border-radius : 5px;">Submit</button>
+</div>
+</form>
+</html>
