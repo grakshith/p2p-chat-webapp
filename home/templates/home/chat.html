@@ -5,12 +5,12 @@
 <h1 style="font-family:'Oswald',sans-serif;">p2p-chat-python</h1>
 <hr>
 <style>
-form { 
-margin: auto;
-padding:7px;
+htmlbody { 
+margin: 0px auto;
+/*padding:7px;*/
 width : 50%;
-border-radius : 10px;
-border : 2px solid #008B8B;
+/*border-radius : 10px;
+border : 2px solid #008B8B;*/
 } 
 textarea:focus{
 box-shadow:0px 0px 15px gray;
@@ -18,30 +18,67 @@ box-shadow:0px 0px 15px gray;
 textarea{
 box-shadow:0px 0px 0px;
 transition:fade, box-shadow 0.35s;
+position:relative;
 }
 sub_button{
 background:white;
+position:relative;
 }
-msg{
+mesg{
 box-shadow:0px 0px 0px;
 transition:fade, box-shadow 0.35s;
 }
-msg:focus{
+mesg:focus{
 box-shadow:0px 0px 15px gray;
 }
 </style>
-<script>
-var x=document.getElementById("msg");
-var y=document.getElementById("but");
-while(x.value == "")
-{
-y.disabled=true;
+<script language="javascript" type="text/javascript">
+function doConnect()
+  {
+    websocket = new WebSocket("ws://localhost:8080");
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+  }
+  function onOpen(evt)
+  {
+    document.getElementById("text").value+="\nConnected";
+  }
+  function onClose(evt)
+  {
+    document.getElementById("text").value+="\nDisonnected";
+  }
+  function onMessage(evt)
+  {
+    document.getElementById("text").value+="\n"+evt.data+"\n";
+  }
+  function onError(evt)
+  {
+    document.getElementById("text").value+="\nError";
+  }
+  function doSend(message)
+  {
+    document.getElementById("text").value+="\n"+message+"\n";
+    websocket.send(message)
+  }
+  function writeToScreen(message)
+  {
+    
+  }
+  window.addEventListener("load", doConnect, false);
+  function doDisconnect() {
+		websocket.close();
+   }
+   function sendText() {
+		doSend( document.getElementById("msg").value );
+   
 }
 </script>
 <br><br>
 </head>
 <body style="font-family:'Open Sans',sans-serif;">
-<form>
+<div class="htmlbody">
 <div class="fieldset">
 <fieldset>
 <legend> Chatroom </legend>
@@ -51,8 +88,8 @@ aghsfhafsdhafsdasd
 <br>
 <div class="textarea">
 <textarea id="text" rows="4" cols="81" style="resize:none;" disabled placeholder="Your chats will appear here"></textarea></div><br>
-<div class="msg"><input id="msg" type="text" name="message" autofocus placeholder="Enter your message here"><br></div><br>
-<div class="sub_button"><button id="but" type="submit" value="Submit" style="margin:auto;border-radius : 5px;">Submit</button>
+<div class="mesg"><input id="msg" type="text" name="message" autofocus placeholder="Enter your message here"><br></div><br>
+<div class="sub_button"><button id="but" onClick="sendText()" type="submit" value="Submit" style="margin:auto;border-radius : 5px;" >Submit</button>
 </div>
-</form>
+</div>
 </html>
