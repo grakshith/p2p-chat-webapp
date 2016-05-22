@@ -13,19 +13,39 @@ class SimpleChat(WebSocket):
    def handleMessage(self):
       for client in clients:
          if client != self:
-            client.sendMessage(self.address[0] + u' - ' + self.data)
+            client.sendMessage(str(self.address) + u' - ' + self.data)
 
    def handleConnected(self):
       print (self.address, 'connected')
       for client in clients:
-         client.sendMessage(self.address[0] + u' - connected')
+         client.sendMessage(str(self.address) + u' - connected')
       clients.append(self)
+      #updateClient(self)
+      for x in clients:
+         li=[]
+         for y in clients:
+            if(x!=y):
+               li.append(str(y.address)+'\n')
+         #x.sendMessage(u"Send Client Data")
+         x.sendMessage(u"!@#$%^&*&^%$#@!!@#$%^&*"+u''.join(li))
+         print(u"!@#$%^&*&^%$#@!!@#$%^&*"+u''.join(li))
+         #x.sendMessage(u"End Cliend Data")
 
    def handleClose(self):
       clients.remove(self)
       print (self.address, 'closed')
       for client in clients:
-         client.sendMessage(self.address[0] + u' - disconnected')
+         client.sendMessage(str(self.address) + u' - disconnected')
+         
+   """def updateClient(self):
+      print "hi"
+      for x in clients:
+         li=[]
+         for y in clients:
+            if(x!=y):
+               li.append(str(y)+'\n')
+         
+         x.sendMessage("!@#$%^&*&^%$#@!!@#$%^&*"+''.join(li))"""
 
 
 if __name__ == "__main__":
