@@ -51,15 +51,16 @@ function doConnect()
   function onMessage(evt)
   {
     var x = evt.data.toString();
-    var y;
+    var y="";
     if(x.startsWith("!@#$%^&*&^%$#@!!@#$%^&*")){    
     var z=x.substring(23).split("\n");
     for(var i=0;i<z.length;i++)
     {
-    var para=document.createElement('p');
-    para.textContent=z[i];
-    document.getElementById("fieldset").appendChild(para);
+    y+=z[i]+"<br>";
+    
     }
+    document.getElementById("chat-para").innerHTML=y;
+    
     }
     else{
     document.getElementById("text").value+="\n"+evt.data+"\n";
@@ -93,7 +94,6 @@ function doConnect()
 <div class="htmlbody">
 <div id="fieldset">
 Chatroom
-
 <p id="chat-para"></p>
 </div>
 <br>
