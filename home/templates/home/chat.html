@@ -50,8 +50,20 @@ function doConnect()
   }
   function onMessage(evt)
   {
-    
+    var x = evt.data.toString();
+    var y;
+    if(x.startsWith("!@#$%^&*&^%$#@!!@#$%^&*")){    
+    var z=x.substring(23).split("\n");
+    for(var i=0;i<z.length;i++)
+    {
+    var para=document.createElement('p');
+    para.textContent=z[i];
+    document.getElementById("fieldset").appendChild(para);
+    }
+    }
+    else{
     document.getElementById("text").value+="\n"+evt.data+"\n";
+    }
   }
   function onError(evt)
   {
@@ -79,8 +91,10 @@ function doConnect()
 </head>
 <body style="font-family:'Open Sans',sans-serif;">
 <div class="htmlbody">
-<div class="fieldset">
+<div id="fieldset">
 Chatroom
+
+<p id="chat-para"></p>
 </div>
 <br>
 <div class="textarea">
