@@ -5,11 +5,10 @@
 <h1 style="font-family:'Oswald',sans-serif;">p2p-chat-python</h1>
 <hr>
 <style type="text/css">
-htmlbody { 
-padding : 50px;
-/*position:relative;*/
-/*border-radius : 10px;
-border : 2px solid #008B8B;*/
+#htmlbody { 
+  margin: 0 auto;
+  width: 50%;
+  padding:10px;
 } 
 fieldset{
 position:relative;
@@ -72,8 +71,12 @@ function doConnect()
   }
   function doSend(message)
   {
+    if(websocket.readyState == 3)
+    {}
+    else{
     document.getElementById("text").value+="\n"+message+"\n";
     websocket.send(message)
+    }
   }
   function writeToScreen(message)
   {
@@ -85,21 +88,26 @@ function doConnect()
    }
    function sendText() {
 		doSend( document.getElementById("msg").value );
+		document.getElementById("msg").value="";
    
 }
 </script>
-<br><br>
+{% if user.is_authenticated %}
+Welcome {{user}}
+<a href="/logout">Logout</a>
+<hr>
+{% endif %}
 </head>
 <body style="font-family:'Open Sans',sans-serif;">
-<div class="htmlbody">
-<div id="fieldset">
+<div id="htmlbody">
+<div id="fieldset" style="text-align:center;">
 Chatroom
 <p id="chat-para"></p>
 </div>
 <br>
 <div class="textarea">
 <textarea id="text" rows="10" cols="81" style="resize:none;" disabled placeholder="Your chats will appear here"></textarea></div><br>
-<div class="mesg"><input id="msg" type="text" name="message" autofocus placeholder="Enter your message here"><br></div><br>
+<div class="mesg"><input id="msg" type="text" name="message" autofocus placeholder="Enter your message here"><br></div></br>
 <div class="sub_button"><button id="but" onClick="sendText()" type="submit" value="Submit" style="margin:auto;border-radius : 5px;" >Submit</button>
 </div>
 </div>
